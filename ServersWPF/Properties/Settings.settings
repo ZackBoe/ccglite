@@ -1,0 +1,21 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="ServersWPF.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="arma2" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\Program Files (x86)\Steam\steamapps\common\Arma 2</Value>
+    </Setting>
+    <Setting Name="arma2oa" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\Program Files (x86)\Steam\steamapps\common\Arma 2 Operation Arrowhead</Value>
+    </Setting>
+    <Setting Name="mods" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\Program Files (x86)\Steam\steamapps\common\Arma 2 Operation Arrowhead</Value>
+    </Setting>
+    <Setting Name="launchparams" Type="System.String" Scope="User">
+      <Value Profile="(Default)">-nosplash</Value>
+    </Setting>
+    <Setting Name="dayzcomepoch" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

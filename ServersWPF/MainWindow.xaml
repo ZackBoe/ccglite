@@ -1,0 +1,106 @@
+﻿<controls:MetroWindow x:Class="ServersWPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        Title="CCG Launcher Lite" Height="441" Width="300" ResizeMode="CanMinimize" ShowWindowCommandsOnTop="True" WindowStartupLocation="CenterScreen">
+
+
+    <controls:MetroWindow.RightWindowCommands>
+        <controls:WindowCommands>
+            <Button Click="Settings_Click" Content="settings">
+
+            </Button>
+        </controls:WindowCommands>
+    </controls:MetroWindow.RightWindowCommands>
+    
+    <Grid x:Name="ServerGrid1">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="166*"/>
+            <ColumnDefinition Width="151*"/>
+        </Grid.ColumnDefinitions>
+        <DataGrid x:Name="ServerGrid" AutoGenerateColumns="False" IsReadOnly="True" CanUserSortColumns="False" SelectionMode="Single" Grid.ColumnSpan="2">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" HeaderStringFormat="int" Binding="{Binding ID}" Visibility="Hidden"/>
+                <DataGridTextColumn Header="Name" HeaderStringFormat="string" Binding="{Binding Name}" Width="251" CanUserResize="False"/>
+                <DataGridTextColumn Header="Players" HeaderStringFormat="string" Binding="{Binding Players}" CanUserResize="False"  Visibility="Hidden"/>
+                <DataGridTextColumn Header="IP" HeaderStringFormat="string" Binding="{Binding FullIP}" Visibility="Collapsed"/>
+                <DataGridTextColumn Header="Mods" HeaderStringFormat="string" Binding="{Binding Mods}" Visibility="Hidden"/>
+            </DataGrid.Columns>
+            <DataGrid.RowStyle>
+                <Style TargetType="{x:Type DataGridRow}">
+                    <EventSetter Event="MouseLeftButtonUp" Handler="ServerGrid_Click"/>
+                    <EventSetter Event="MouseDoubleClick" Handler="Launch"/>
+                    <Setter Property="Background" Value="White" />
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#CC119EDA"/>
+                            <Setter Property="Foreground" Value="White"/>
+                        </Trigger>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Background" Value="#CC119EDA"/>
+                            <Setter Property="Foreground" Value="White"/>
+                        </Trigger>
+                    </Style.Triggers>
+
+                </Style>
+            </DataGrid.RowStyle>
+        </DataGrid>
+        
+    </Grid>
+
+    <controls:MetroWindow.Flyouts>
+        <controls:FlyoutsControl>
+            <controls:Flyout x:Name="serverDetails" Header="Flyout" Position="Right" Width="300" IsOpen="False">
+                <Grid>
+                    <Label x:Name="fly_serverName" Content="wat"  HorizontalAlignment="Left" Margin="5,0,0,0" VerticalAlignment="Top"></Label>
+                    <Label x:Name="fly_serverPlayers" Content="wat"  HorizontalAlignment="Left" Margin="5,20,0,0" VerticalAlignment="Top"></Label>
+                    <ListBox x:Name="fly_playerList" HorizontalAlignment="Left" Margin="10,50,0,0" VerticalAlignment="Top" Width="280" Height="200" >
+                        <ListBox.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <UniformGrid Columns="2"/>
+                            </ItemsPanelTemplate>
+                        </ListBox.ItemsPanel>
+                        <ListBox.ItemContainerStyle>
+                            <Style TargetType="ListBoxItem">
+                                <Setter Property="Height" Value="20"/>
+                            </Style>
+                        </ListBox.ItemContainerStyle>
+                    </ListBox>
+                    <Label x:Name="fly_serverMods" Content="Label" HorizontalAlignment="Left" Margin="10,290,0,0" VerticalAlignment="Top"/>
+                    <Label x:Name="fly_serverGame" Content="Label" HorizontalAlignment="Left" Margin="10,305,0,0" VerticalAlignment="Top"/>
+                    <Button Content="Join Server" Click="Launch" HorizontalAlignment="Left" Margin="10,330,0,0" VerticalAlignment="Top" Width="75"></Button>
+                    <Label x:Name="fly_serverIP" Content="Label" HorizontalAlignment="Left" Margin="90,330,0,0" VerticalAlignment="Top" ToolTip="Right click to copy IP">
+                        <Label.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Click="CopyIP" Header="Copy IP">
+                                </MenuItem>
+                            </ContextMenu>
+                        </Label.ContextMenu>
+                    </Label>
+                    <Label x:Name="fly_serverVer" Content="Label" HorizontalAlignment="Left" Margin="205,330,0,0" VerticalAlignment="Top"/>
+                </Grid>
+            </controls:Flyout>
+
+            <controls:Flyout x:Name="settings" Header="Settings" Position="Right" Width="300" IsOpen="False">
+                <Grid>
+                    <Label Content="Arma 2 Path" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="setting_arma2" HorizontalAlignment="Left" Height="23" Margin="10,30,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="280"/>
+
+                    <Label Content="Arma 2 OA Path" HorizontalAlignment="Left" Margin="10,60,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="setting_arma2oa" HorizontalAlignment="Left" Height="23" Margin="10,85,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="280"/>
+
+                    <Label Content="Mods Path" HorizontalAlignment="Left" Margin="10,115,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="setting_mods" HorizontalAlignment="Left" Height="23" Margin="10,140,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="280"/>
+
+                    <Label Content="Extra Launch Params" HorizontalAlignment="Left" Margin="10,170,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="settings_params" HorizontalAlignment="Left" Height="23" Margin="10,195,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="280"/>
+
+                    <CheckBox x:Name="settings_dayzcomepoch" Content="Use DayZ Commander Epoch?" HorizontalAlignment="Left" Margin="10,230,0,0" VerticalAlignment="Top" ToolTip="CCG's launche uses a labeled Epoch mod folder, whereas DayZ Commander does not.  Enable this if you downloaded Epoch with DayZ Commander"/>
+                    
+                    <Button Content="Save Settings" Click="SaveSettings" HorizontalAlignment="Left" Margin="10,260,0,0" VerticalAlignment="Top" Width="280" Height="75"></Button>
+                </Grid>
+            </controls:Flyout>
+        </controls:FlyoutsControl>
+    </controls:MetroWindow.Flyouts>
+
+</controls:MetroWindow>
